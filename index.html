@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CIMEDU 9 · Instrumentos del taller</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F4F1; --card:#FFFFFF; --ink:#141414; --muted:#6b6b66; --rule:#CFCFCA; --soft:#E9E9E4;
+  --purple:#442E7C; --indigo:#222045; --pink:#DC2380; --cream:#F4F4F1; --lilac:#c9bdf0;
+  --serif:'Instrument Serif',Georgia,serif; --body:'Space Grotesk',Arial,sans-serif; --ui:Inter,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px 56px}
+.eyebrow{font-family:var(--ui);font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
+
+/* portada: fondo índigo, como la diapositiva de apertura */
+.cover{position:sticky;top:0;z-index:20;display:flex;align-items:center;flex-wrap:wrap;gap:14px;overflow:hidden;background:var(--indigo);color:var(--cream);border-radius:0 0 14px 14px;padding:10px 20px;margin:0 -20px}
+.cover .eyebrow{color:var(--lilac)}
+.cover h1{font-family:var(--serif);font-style:italic;font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.5px;margin:0}
+.cover .sub{font-family:var(--ui);font-size:clamp(22px,3vw,34px);font-weight:500;line-height:1.2;letter-spacing:-.5px;margin-top:20px;max-width:24ch}
+.cover .pink{font-family:var(--body);font-size:14px;font-weight:500;color:var(--pink)}
+.cover .q{position:absolute;right:-30px;bottom:-120px;font-family:var(--serif);font-style:italic;font-size:420px;line-height:1;color:rgba(68,46,124,.55);pointer-events:none}
+
+/* pestañas */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
+.tab{background:var(--card);border:1px solid var(--rule);color:var(--muted);border-radius:999px;padding:10px 18px;font:600 14px var(--ui);cursor:pointer;display:flex;gap:10px;align-items:center}
+.tab b{width:24px;height:24px;border-radius:50%;background:var(--soft);display:inline-grid;place-items:center;font-size:12px;color:var(--purple)}
+.tab.on{background:var(--indigo);border-color:var(--indigo);color:var(--cream)}
+.tab.on b{background:var(--pink);color:var(--cream)}
+.part{display:none}.part.on{display:block}
+
+/* banda de herramienta */
+.band{position:relative;overflow:hidden;background:var(--indigo);color:var(--cream);border-radius:16px;padding:34px 36px 32px;margin-bottom:18px}
+.band .n{font-family:var(--ui);font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--lilac)}
+.band h2{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(50px,8vw,92px);line-height:.95;letter-spacing:-2px;margin:10px 0 0}
+.band h2 em{color:var(--pink)}
+.band p{color:#dcd8ec;margin:12px 0 0;max-width:60ch;font-size:17px}
+
+/* tarjetas */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:24px;margin-bottom:16px}
+.card.dark{background:var(--indigo);border-color:var(--indigo);color:var(--cream)}
+h3{font-family:var(--ui);font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin:0 0 16px;font-weight:700;display:flex;gap:12px;align-items:center}
+h3 i{font-style:normal;font-family:var(--ui);font-weight:700;color:var(--purple)}
+.card.dark h3,.card.dark h3 i{color:var(--lilac)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-family:var(--ui);font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.f small{color:var(--muted);font-size:12px}
+input,select{background:var(--paper);color:var(--ink);border:1px solid var(--rule);border-radius:10px;padding:10px 12px;font:600 16px var(--body);width:100%;min-width:0}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--pink);outline-offset:1px}
+input[type=number]{font-variant-numeric:tabular-nums}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--purple)}
+.toggle{display:flex;gap:10px;align-items:center;margin-top:16px;color:var(--muted);font-size:15px;cursor:pointer}
+.btn{background:var(--purple);color:var(--cream);border:0;border-radius:10px;padding:12px 18px;font:700 15px var(--ui);cursor:pointer;width:100%}
+.btn:disabled{opacity:.6;cursor:default}
+
+/* resultados */
+.res{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.k{background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:16px}
+.k .l{font-family:var(--ui);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.k .v{font-family:var(--serif);font-style:italic;font-size:60px;line-height:1;margin-top:6px;font-variant-numeric:tabular-nums;color:var(--purple)}
+.k .s{font-size:13px;color:var(--muted);margin-top:6px}
+.k.hero{background:var(--purple);border-color:var(--purple)}
+.k.hero .l,.k.hero .s{color:#e4dcf7}
+.k.hero .v{color:var(--cream)}
+.sc{cursor:pointer;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1px solid var(--rule);border-radius:14px;padding:14px}
+.sc.on{border-color:var(--purple);background:#fff;box-shadow:0 0 0 2px rgba(68,46,124,.18)}
+.sc .t{font-family:var(--ui);font-weight:700;font-size:14px}
+.sc .n{font-family:var(--serif);font-style:italic;font-size:48px;line-height:1.05;font-variant-numeric:tabular-nums;color:var(--purple)}
+.sc .d{font-size:13px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:6px}
+th{text-align:left;font-family:var(--ui);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px;border-bottom:1px solid var(--rule);font-weight:700}
+td{padding:10px 8px;border-bottom:1px solid var(--soft);vertical-align:middle}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+td input{width:110px;padding:6px 8px;font-size:14px}
+tr.tot td{font-weight:700;border-top:1px solid var(--ink);border-bottom:none;color:var(--purple)}
+.bars{display:flex;align-items:flex-end;gap:6px;height:160px;margin-top:12px}
+.bars .c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0}
+.bars .v{font-family:var(--ui);font-size:11px;font-weight:700;color:var(--muted);margin-bottom:4px;font-variant-numeric:tabular-nums}
+.bars .b{width:100%;max-width:46px;background:var(--purple);border-radius:6px 6px 0 0;min-height:2px}
+.bars .c.pk .b{background:var(--pink)}
+.xl{display:flex;gap:6px;margin-top:6px}
+.xl span{flex:1;text-align:center;font-family:var(--ui);font-size:11px;color:var(--muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.note{font-size:14px;color:var(--muted);margin:12px 0 0}
+.note.warn{color:var(--pink);font-weight:600}
+.fun{display:grid;gap:10px;margin-top:6px}
+.fr{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;font-size:15px}
+.trk{height:24px;background:var(--soft);border-radius:8px;overflow:hidden}
+.trk i{display:block;height:100%;background:var(--purple);border-radius:8px}
+.fr:last-child .trk i{background:var(--pink)}
+.fr .n{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.stage{display:grid;grid-template-columns:150px 1fr 120px;gap:12px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--soft);border-radius:8px}
+.stage.btl{background:rgba(220,35,128,.10)}
+.bar{height:14px;background:var(--soft);border-radius:99px;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--purple);border-radius:99px}
+.bar b{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--pink);border-radius:2px}
+.pill{display:inline-block;font-family:var(--ui);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.pill.ok{background:var(--purple);color:var(--cream)}.pill.bad{background:var(--pink);color:var(--cream)}.pill.top{background:var(--ink);color:var(--cream)}
+.verdict{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.verdict .big{font-family:var(--serif);font-style:italic;font-size:110px;line-height:.9;color:var(--purple);font-variant-numeric:tabular-nums}
+.verdict .t{flex:1;min-width:220px;display:flex;flex-direction:column;gap:8px}
+.btlname{font-family:var(--serif);font-style:italic;font-weight:400;font-size:64px;line-height:1;margin:6px 0 0;color:var(--cream)}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:30px;color:var(--muted);font-family:var(--ui);font-size:13px}
+@media(max-width:620px){.cover{padding:36px 26px}.fr{grid-template-columns:110px 1fr 70px}.stage{grid-template-columns:110px 1fr 90px}.grid{grid-template-columns:1fr 1fr}.band{padding:26px 22px}.cover .q{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <h1>Instrumentos del taller</h1>
+    <div class="pink">Del marketing al growth</div>
+  </header>
+
+  <!-- ============ ACCESO ============ -->
+  <section class="card" id="acceso">
+    <h3><i>+</i> Solicita tu acceso</h3>
+    <form id="acForm" class="grid" style="align-items:end">
+      <div class="f"><label for="acInst">Institución</label><input id="acInst" required maxlength="120" placeholder="Nombre de tu institución" autocomplete="organization"></div>
+      <div class="f"><label for="acWa">WhatsApp</label><input id="acWa" required type="tel" maxlength="20" placeholder="+52 ..." autocomplete="tel"><small>Te escribimos a este número para darte acceso.</small></div>
+      <input id="acHp" name="website" tabindex="-1" autocomplete="off" style="display:none">
+      <div class="f"><button class="btn" id="acBtn" type="submit">Pedir acceso</button></div>
+    </form>
+    <p class="note" id="acMsg">Usamos tu institución y tu WhatsApp solo para darte acceso a estas herramientas.</p>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab on" data-p="p1" role="tab"><b>1</b>Metas</button>
+    <button class="tab" data-p="p2" role="tab"><b>2</b>Personas</button>
+    <button class="tab" data-p="p3" role="tab"><b>3</b>Embudo</button>
+  </nav>
+
+  <!-- ============ 1 · METAS ============ -->
+  <section class="part on" id="p1">
+    <div class="band">
+      <div class="n">Herramienta 01</div>
+      <h2>Calculador de <em>metas</em></h2>
+      <p>Cuántos alumnos nuevos necesitas, en qué meses, y cuántos leads y presupuesto requiere esa meta.</p>
+    </div>
+
+    <div class="card">
+      <h3><i>01</i> Levantamiento de tu institución</h3>
+      <div class="grid">
+        <div class="f"><label for="mNombre">Institución</label><input id="mNombre" placeholder="Nombre del colegio"></div>
+        <div class="f"><label for="mTipo">Tipo</label>
+          <select id="mTipo"><option value="k12">K-12</option><option value="prepa">Preparatoria</option><option value="univ">Universidad</option></select></div>
+        <div class="f"><label for="mAct">Matrícula actual</label><input type="number" id="mAct" min="0" value="500"><small>Alumnos inscritos hoy</small></div>
+        <div class="f"><label for="mCap">Capacidad total</label><input type="number" id="mCap" min="0" value="650"><small>Lugares disponibles en total</small></div>
+        <div class="f"><label for="mGrad">Egresados que no siguen</label><input type="number" id="mGrad" min="0" value="80"><small>Salen al terminar nivel</small></div>
+        <div class="f"><label for="mBaj">Bajas del ciclo</label><input type="number" id="mBaj" min="0" value="40"><small>Dejan la institución</small></div>
+        <div class="f"><label for="mHist">Nuevos del ciclo anterior</label><input type="number" id="mHist" min="0" value="120"><small>Alumnos que entraron</small></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><i>02</i> Proyección y metas</h3>
+      <div class="res" id="escRes"></div>
+      <div class="grid" style="margin-top:18px">
+        <div class="f"><label for="mCrec">Crecimiento deseado</label><input type="number" id="mCrec" min="0" value="8"><small>% sobre la matrícula actual</small></div>
+        <div class="f"><label for="mInicio">Inicio de campaña</label><input type="month" id="mInicio"></div>
+        <div class="f"><label for="mMeses">Meses de campaña</label><input type="number" id="mMeses" min="1" max="12" value="6"></div>
+        <div class="f"><label for="mConv">Conversión lead → inscrito</label><input type="number" id="mConv" min="0" step="0.1" value="10"><small>% de referencia para tu tipo; puedes cambiarlo</small></div>
+        <div class="f"><label for="mCpl">Costo por lead</label><input type="number" id="mCpl" min="0" value="150"><small>MXN de referencia para tu tipo; puedes cambiarlo</small></div>
+      </div>
+      <div class="res" id="metaRes" style="margin-top:18px"></div>
+      <p class="note" id="metaNote"></p>
+    </div>
+
+    <div class="card">
+      <h3><i>03</i> Meta mes a mes</h3>
+      <div class="bars" id="mBars"></div>
+      <div class="xl" id="mXl"></div>
+      <div style="overflow-x:auto"><table>
+        <thead><tr><th>Mes</th><th class="r">Inscritos</th><th class="r">Leads</th><th class="r">Presupuesto</th></tr></thead>
+        <tbody id="mTbl"></tbody>
+      </table></div>
+    </div>
+
+    <div class="card">
+      <h3><i>04</i> Embudo requerido y presupuesto</h3>
+      <div class="fun" id="mFun"></div>
+      <p class="note" id="mFunNote"></p>
+      <div style="overflow-x:auto"><table>
+        <thead><tr><th>Canal</th><th class="r">% del mix</th><th class="r">Leads</th><th class="r">Inscritos</th><th class="r">Presupuesto</th></tr></thead>
+        <tbody id="cTbl"></tbody>
+      </table></div>
+      <p class="note" id="cNote"></p>
+    </div>
+  </section>
+
+  <!-- ============ 2 · PERSONAS ============ -->
+  <section class="part" id="p2">
+    <div class="band">
+      <div class="n">Herramienta 02</div>
+      <h2>Calculador de <em>personas</em></h2>
+      <p>De cuántas personas necesitas en tu equipo de ventas para cumplir la meta: setters y closers.</p>
+    </div>
+
+    <div class="card">
+      <h3><i>01</i> Tu meta y tu embudo</h3>
+      <div class="grid">
+        <div class="f"><label for="pMeta">Meta de nuevo ingreso</label><input type="number" id="pMeta" min="1" value="120"><small>Alumnos nuevos en la campaña</small></div>
+        <div class="f"><label for="pMeses">Duración de la campaña</label><input type="number" id="pMeses" min="1" value="6"><small>Meses</small></div>
+        <div class="f"><label for="pTcita">Leads que agendan cita</label><input type="number" id="pTcita" min="1" max="100" value="15"><small>% de los leads</small></div>
+        <div class="f"><label for="pTasis">Asistencia a la cita</label><input type="number" id="pTasis" min="1" max="100" value="80"><small>% de citas agendadas</small></div>
+        <div class="f"><label for="pTcierre">Cierre</label><input type="number" id="pTcierre" min="1" max="100" value="50"><small>% de citas asistidas</small></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><i>02</i> Capacidad por persona</h3>
+      <div class="grid">
+        <div class="f"><label for="pCapSet">Un setter atiende</label><input type="number" id="pCapSet" min="1" value="300"><small>Leads al mes</small></div>
+        <div class="f"><label for="pCapClo">Un closer atiende</label><input type="number" id="pCapClo" min="1" value="60"><small>Citas al mes</small></div>
+        <div class="f"><label for="pIaMult">Multiplicador con IA</label><input type="number" id="pIaMult" min="1" step="0.5" value="2"><small>× setter</small></div>
+      </div>
+      <label class="toggle"><input type="checkbox" id="pIa"> Mis setters se apoyan en IA y automatizaciones</label>
+    </div>
+    <div class="card dark">
+      <h3><i>03</i> Tu equipo de ventas</h3>
+      <div class="res">
+        <div class="k"><div class="l">Setters</div><div class="v" id="rSet">—</div><div class="s">agendan citas</div></div>
+        <div class="k"><div class="l">Closers</div><div class="v" id="rClo">—</div><div class="s">atienden citas y cierran</div></div>
+        <div class="k hero"><div class="l">Personas en total</div><div class="v" id="rTot">—</div><div class="s" id="rMsg"></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><i>04</i> El cálculo, paso a paso</h3>
+      <table><tbody id="pSteps"></tbody></table>
+      <p class="note">Las capacidades son una referencia para arrancar. Ajústalas con los números reales de tu equipo. Siempre necesitas mínimo un setter y un closer.</p>
+    </div>
+    <div class="card">
+      <h3><i>05</i> Cómo se lee este cálculo</h3>
+      <div id="pExplain"></div>
+    </div>
+  </section>
+
+  <!-- ============ 3 · EMBUDO ============ -->
+  <section class="part" id="p3">
+    <div class="band">
+      <div class="n">Herramienta 03</div>
+      <h2>Calculador de <em>embudo</em></h2>
+      <p>Dónde se te escapan los prospectos entre el lead y la inscripción, y cuántos inscritos ganarías al corregirlo.</p>
+    </div>
+
+    <div class="card">
+      <h3><i>01</i> Tu embudo del último ciclo</h3>
+      <div class="grid">
+        <div class="f"><label for="eLead">Leads</label><input type="number" id="eLead" min="0" value="100"><label style="display:flex;gap:6px;align-items:center;font-size:13px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)"><input type="checkbox" id="eLeadNs"> No sé</label></div>
+        <div class="f"><label for="eCont">Contactados</label><input type="number" id="eCont" min="0" value="70"><label style="display:flex;gap:6px;align-items:center;font-size:13px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)"><input type="checkbox" id="eContNs"> No sé (cuenta como déficit)</label></div>
+        <div class="f"><label for="eCita">Citas</label><input type="number" id="eCita" min="0" value="30"><label style="display:flex;gap:6px;align-items:center;font-size:13px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)"><input type="checkbox" id="eCitaNs"> No sé (cuenta como déficit)</label></div>
+        <div class="f"><label for="eAsis">Asistencias</label><input type="number" id="eAsis" min="0" value="20"><label style="display:flex;gap:6px;align-items:center;font-size:13px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)"><input type="checkbox" id="eAsisNs"> No sé (cuenta como déficit)</label></div>
+        <div class="f"><label for="eInsc">Inscritos</label><input type="number" id="eInsc" min="0" value="8"><label style="display:flex;gap:6px;align-items:center;font-size:13px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)"><input type="checkbox" id="eInscNs"> No sé (cuenta como déficit)</label></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="verdict">
+        <span class="big" id="tasa">—</span>
+        <div class="t"><span class="pill top" id="tasaPill">—</span><span id="tasaMsg"></span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><i>02</i> Cada etapa contra su mínimo</h3>
+      <div id="stages"></div>
+      <p class="note">Mínimos: contactados 80% de los leads, citas 60% de los contactados, asistencias 60% de las citas e inscritos 50% de las asistencias. La marca rosa indica el mínimo de cada etapa.</p>
+    </div>
+    <div class="card dark">
+      <h3><i>03</i> Tu cuello de botella</h3>
+      <div class="btlname" id="btlName">—</div>
+      <p id="btlMsg" style="margin-top:12px;color:#dcd8ec"></p>
+      <p id="btlPred" style="font-weight:700;margin-top:8px;color:var(--cream)"></p>
+    </div>
+  </section>
+
+  <footer class="foot"><span>Del marketing al growth · CIMEDU 9</span></footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const num=id=>{const x=parseFloat($(id).value);return isFinite(x)&&x>0?x:0};
+const fmt=n=>Math.round(n||0).toLocaleString('es-MX');
+const pct=(x,d=1)=>(Math.round(x*Math.pow(10,d))/Math.pow(10,d)).toLocaleString('es-MX',{maximumFractionDigits:d})+'%';
+const money=n=>'$'+Math.round(n||0).toLocaleString('es-MX');
+const fmt1=n=>n.toLocaleString('es-MX',{maximumFractionDigits:1});
+const MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const MES3=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+/* ---------- solicitud de acceso ---------- */
+$('acForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=$('acBtn'), msg=$('acMsg');
+  btn.disabled=true; btn.textContent='Enviando…';
+  try{
+    const r=await fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({institucion:$('acInst').value,whatsapp:$('acWa').value,website:$('acHp').value})});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(j.error||'No se pudo enviar. Intenta de nuevo.');
+    msg.className='note';
+    msg.textContent='Listo. Recibimos tu solicitud y te escribimos por WhatsApp.';
+    e.target.reset();
+  }catch(err){
+    msg.className='note warn';
+    msg.textContent=err.message||'No se pudo enviar. Intenta de nuevo.';
+  }finally{
+    btn.disabled=false; btn.textContent='Pedir acceso';
+  }
+});
+
+/* ---------- pestañas ---------- */
+let esc='crec';
+document.addEventListener('click',e=>{
+  const t=e.target.closest('.tab');
+  if(t){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===t));document.querySelectorAll('.part').forEach(p=>p.classList.toggle('on',p.id===t.dataset.p));window.scrollTo({top:0,behavior:'smooth'});return;}
+  const s=e.target.closest('[data-e]');
+  if(s){esc=s.dataset.e;renderAll();}
+});
+document.addEventListener('input',renderAll);
+document.addEventListener('change',e=>{if(e.target.id==='mTipo'){const P=PERF[e.target.value];$('mConv').value=Math.round(P.conv*1000)/10;$('mCpl').value=P.cpl;}renderAll();});
+
+/* ---------- 1 · METAS ---------- */
+const PERF={
+  k12:{label:'K-12',rot:.13,conv:.10,cpl:150,rango:'8%–15%',est:[6,13,14,7,12,13,6,5,6,6,6,6]},
+  prepa:{label:'Preparatoria',rot:.38,conv:.09,cpl:200,rango:'6%–12%',est:[8,12,15,12,14,15,8,6,4,3,2,1]},
+  univ:{label:'Universidad',rot:.30,conv:.08,cpl:280,rango:'5%–15%',est:[9,11,13,12,14,12,8,5,4,7,6,4]}
+};
+const CUM={lead:.10,cont:.116,cita:.353,asis:.47};
+const CANALES=['Referido','Ferias / Expos / Eventos','Convenios','Meta Ads','Google Ads','Orgánico / SEO','Reseñas'];
+const MIX=[15,10,10,30,20,10,5];
+
+function buildCanales(){
+  $('cTbl').innerHTML=CANALES.map((c,i)=>`<tr><td>${c}</td><td class="r"><input type="number" min="0" max="100" id="mc${i}" value="${MIX[i]}" style="width:80px"></td><td class="r" id="cl${i}">0</td><td class="r" id="ci${i}">0</td><td class="r" id="cp${i}">$0</td></tr>`).join('')
+   +`<tr class="tot"><td>Total</td><td class="r" id="cSum">100%</td><td class="r" id="cLT">0</td><td class="r" id="cIT">0</td><td class="r" id="cPT">$0</td></tr>`;
+}
+function distribute(total,w){
+  const sum=w.reduce((a,b)=>a+b,0)||1;
+  const raw=w.map(x=>total*x/sum), out=raw.map(Math.floor);
+  let falta=Math.round(total)-out.reduce((a,b)=>a+b,0);
+  const ord=raw.map((v,i)=>[v-Math.floor(v),i]).sort((a,b)=>b[0]-a[0]);
+  for(let k=0;falta>0&&k<ord.length;k++,falta--)out[ord[k][1]]++;
+  return out;
+}
+function metas(){
+  const P=PERF[$('mTipo').value];
+  const act=num('mAct'), cap=num('mCap'), gr=num('mGrad'), bj=num('mBaj');
+  let rep=gr+bj, estim=false;
+  if(rep===0&&act>0){rep=Math.round(act*P.rot);estim=true;}
+  rep=Math.min(rep,act);
+  const crecN=Math.round(act*num('mCrec')/100);
+  const E={base:rep, crec:rep+crecN, cap:cap>0?Math.max(rep,cap-(act-rep)):null};
+  const meta=E[esc]??E.crec;
+  const retenidos=act-rep;
+  const matCierre=retenidos+meta;
+
+  $('escRes').innerHTML=[['base','Base','Mantener la matrícula',E.base],['crec','Crecimiento','Crecer sobre tu matrícula',E.crec],['cap','Capacidad','Llenar los cupos libres',E.cap]]
+    .map(([k,t,d,v])=>`<button class="sc${esc===k?' on':''}" data-e="${k}"><div class="t">${t}</div><div class="n">${v==null?'—':fmt(v)}</div><div class="d">${d}</div></button>`).join('');
+
+  const usaConv=num('mConv')>0;
+  const c=usaConv?num('mConv')/100:P.conv;
+  const s=c/CUM.lead;
+  const cpl=num('mCpl')||P.cpl;
+  const start=$('mInicio').value||(()=>{const h=new Date();return h.getFullYear()+'-'+String(h.getMonth()+1).padStart(2,'0')})();
+  const [y0,m0]=start.split('-').map(Number);
+  const n=Math.max(1,Math.min(12,num('mMeses')||1));
+  const meses=[];
+  for(let i=0;i<n;i++){const d=new Date(y0,m0-1+i,1);meses.push({mi:d.getMonth(),y:d.getFullYear(),w:P.est[d.getMonth()]});}
+  const insc=distribute(meta,meses.map(x=>x.w));
+  const lds=insc.map(v=>Math.ceil(v/c));
+  const leads=lds.reduce((a,b)=>a+b,0);
+  const pres=leads*cpl;
+
+  $('metaRes').innerHTML=`
+    <div class="k hero"><div class="l">Meta de nuevos inscritos</div><div class="v">${fmt(meta)}</div><div class="s">en ${n} ${n===1?'mes':'meses'} de campaña</div></div>
+    <div class="k"><div class="l">Asientos a reponer</div><div class="v">${fmt(rep)}</div><div class="s">${estim?'estimado con rotación del sector':'egresados que no siguen + bajas'}</div></div>
+    <div class="k"><div class="l">Matrícula al cierre</div><div class="v">${fmt(matCierre)}</div><div class="s">${cap>0?pct(matCierre/cap*100,0)+' de la capacidad':'sin capacidad capturada'}</div></div>
+    <div class="k"><div class="l">Presupuesto total</div><div class="v" style="font-size:44px">${money(pres)}</div><div class="s">${fmt(leads)} leads · ${money(cpl)} por lead</div></div>`;
+  $('metaNote').innerHTML=`Referencias para <b>${P.label}</b>: conversión ${pct(P.conv*100,0)}, CPL ${money(P.cpl)}, crecimiento sano ${P.rango}. Reemplázalas con tu dato cuando lo tengas.${estim?' <span class="warn">Sin egresos ni bajas capturados, la reposición es estimada.</span>':''}`;
+
+  const maxI=Math.max(...insc,1), picoIdx=insc.indexOf(Math.max(...insc));
+  $('mBars').innerHTML=insc.map((v,i)=>`<div class="c${i===picoIdx?' pk':''}"><div class="v">${fmt(v)}</div><div class="b" style="height:${v/maxI*100}%"></div></div>`).join('');
+  $('mXl').innerHTML=meses.map(m=>`<span>${MES3[m.mi]} ${String(m.y).slice(2)}</span>`).join('');
+  $('mTbl').innerHTML=meses.map((m,i)=>`<tr><td>${MESES[m.mi]} ${m.y}</td><td class="r">${fmt(insc[i])}</td><td class="r">${fmt(lds[i])}</td><td class="r">${money(lds[i]*cpl)}</td></tr>`).join('')
+    +`<tr class="tot"><td>Total</td><td class="r">${fmt(meta)}</td><td class="r">${fmt(leads)}</td><td class="r">${money(pres)}</td></tr>`;
+
+  const etapas=[['Leads',leads],['Contactados',Math.ceil(meta/(CUM.cont*s))],['Citas agendadas',Math.ceil(meta/(CUM.cita*s))],['Asistencias',Math.ceil(meta/(CUM.asis*s))],['Inscritos',meta]];
+  const maxE=Math.max(...etapas.map(e=>e[1]),1);
+  $('mFun').innerHTML=etapas.map(([l,v])=>`<div class="fr"><span>${l}</span><div class="trk"><i style="width:${v/maxE*100}%"></i></div><span class="n">${fmt(v)}</span></div>`).join('');
+  $('mFunNote').textContent=`Conversión usada: ${pct(c*100)} lead → inscrito (${usaConv&&Math.abs(num('mConv')/100-P.conv)>1e-9?'ajustada por ti':'de referencia'}).`;
+
+  const mix=CANALES.map((_,i)=>num('mc'+i));
+  const sumMix=mix.reduce((a,b)=>a+b,0);
+  CANALES.forEach((_,i)=>{
+    $('cl'+i).textContent=fmt(leads*mix[i]/100);
+    $('ci'+i).textContent=fmt(meta*mix[i]/100);
+    $('cp'+i).textContent=money(pres*mix[i]/100);
+  });
+  $('cSum').textContent=pct(sumMix,0);
+  $('cLT').textContent=fmt(leads*sumMix/100);
+  $('cIT').textContent=fmt(meta*sumMix/100);
+  $('cPT').textContent=money(pres*sumMix/100);
+  $('cNote').className='note'+(Math.abs(sumMix-100)<0.5?'':' warn');
+  $('cNote').textContent=Math.abs(sumMix-100)<0.5?'El mix suma 100%. Referidos y convenios suelen convertir más que la pauta; ajusta el mix con tu experiencia.':`El mix suma ${pct(sumMix,0)}. Ajusta los porcentajes para que sumen 100%.`;
+}
+
+/* ---------- 2 · PERSONAS ---------- */
+function personas(){
+  const meta=num('pMeta'), meses=num('pMeses')||1;
+  const tc=num('pTcita')/100, ta=num('pTasis')/100, tci=num('pTcierre')/100;
+  const ia=$('pIa').checked?(num('pIaMult')||1):1;
+  const capS=num('pCapSet')*ia, capC=num('pCapClo');
+  const insMes=meta/meses;
+  const asist=tci?insMes/tci:0;
+  const agend=ta?asist/ta:0;
+  const leads=tc?agend/tc:0;
+  const conv=tc*ta*tci*100;
+  const setters=Math.max(1,Math.ceil(capS?leads/capS:1));
+  const closers=Math.max(1,Math.ceil(capC?asist/capC:1));
+  $('rSet').textContent=setters;
+  $('rClo').textContent=closers;
+  $('rTot').textContent=setters+closers;
+  $('rMsg').textContent=`Para ${fmt(meta)} inscritos en ${fmt(meses)} meses.`;
+  $('pSteps').innerHTML=[
+    ['Inscritos que necesitas por mes',fmt(insMes)],
+    ['Citas asistidas por mes (inscritos ÷ cierre)',fmt(asist)],
+    ['Citas agendadas por mes (asistidas ÷ asistencia)',fmt(agend)],
+    ['Leads por mes (agendadas ÷ % que agenda)',fmt(leads)],
+    ['Conversión total de lead a inscrito',pct(conv)],
+    [`Capacidad de un setter${ia>1?' con IA':''}`,fmt(capS)+' leads/mes'],
+    ['Setters (leads ÷ capacidad, mínimo 1)',`${fmt1(capS?leads/capS:0)} → ${setters}`],
+    ['Closers (citas asistidas ÷ capacidad, mínimo 1)',`${fmt1(capC?asist/capC:0)} → ${closers}`]
+  ].map(r=>`<tr><td>${r[0]}</td><td class="r"><b>${r[1]}</b></td></tr>`).join('');
+  const dh=22;
+  $('pExplain').innerHTML=`<table><tbody>
+    <tr><td><b>Setter</b></td><td>Atiende unos ${fmt(capS)} leads al mes, cerca de ${fmt(capS/dh)} por día hábil. Se activa porque cada lead necesita primer contacto, calificación y seguimiento antes de que exista una cita. Con ${fmt(leads)} leads al mes necesitas ${setters}.</td></tr>
+    <tr><td><b>Lo que hace el setter</b></td><td>Contacta al lead por el canal donde llegó (llamada, WhatsApp o correo), lo califica (interés, presupuesto, cuándo empieza), le da seguimiento hasta que agenda o se descarta, y registra cada paso en el CRM. Cada lead suele pedir varios mensajes o llamadas; el número exacto lo mides con tus datos.</td></tr>
+    <tr><td><b>Closer</b></td><td>Atiende unas ${fmt(capC)} citas al mes, cerca de ${fmt(capC/dh)} por día hábil. Se activa porque ${fmt(asist)} citas asistidas al mes necesitan cierre. Con ${fmt(asist)} citas necesitas ${closers}.</td></tr>
+    <tr><td><b>Lo que hace el closer</b></td><td>Conduce la reunión o el recorrido, resuelve objeciones, propone la inscripción y da seguimiento hasta que se inscribe o se registra el motivo de la pérdida.</td></tr>
+    <tr><td><b>Ejemplo con tus cifras</b></td><td>${fmt(meta)} inscritos en ${fmt(meses)} meses → ${fmt(insMes)} inscritos al mes → ${fmt(asist)} citas asistidas → ${fmt(agend)} citas agendadas → ${fmt(leads)} leads al mes.</td></tr>
+  </tbody></table>`;
+}
+
+/* ---------- 3 · EMBUDO ---------- */
+const ST=[
+  {k:'eLead',n:'Leads'},
+  {k:'eCont',n:'Contactados',min:.80,verb:'contactar'},
+  {k:'eCita',n:'Citas',min:.60,verb:'agendar cita'},
+  {k:'eAsis',n:'Asistencias',min:.60,verb:'lograr que asistan'},
+  {k:'eInsc',n:'Inscritos',min:.50,verb:'cerrar'}
+];
+function embudo(){
+  const unk=ST.map(s=>$(s.k+'Ns').checked);
+  const v=ST.map((s,i)=>unk[i]?0:Math.max(0,parseFloat($(s.k).value)||0));
+  const L=v[0];
+  const tasa=L?v[4]/L:NaN;
+  $('tasa').textContent=L?pct(tasa*100):'—';
+  const pill=$('tasaPill'), msg=$('tasaMsg');
+  if(!L){pill.className='pill top';pill.textContent='Sin datos';msg.textContent='Escribe cuántos leads tuviste en el ciclo.';}
+  else if(tasa<.10){pill.className='pill bad';pill.textContent='Deficiencia';msg.textContent='Tu tasa de inscripción está por debajo de 10%. Hay una deficiencia que trabajar en tu proceso.';}
+  else if(tasa<=.14){pill.className='pill ok';pill.textContent='Sana';msg.textContent='Tu tasa de inscripción está entre 10% y 14%, el rango sano.';}
+  else{pill.className='pill top';pill.textContent='Arriba del rango';msg.textContent='Tu tasa supera 14%. Cuida que el volumen de leads alcance para tu meta.';}
+
+  const rs=ST.map((s,i)=>i===0?null:(v[i-1]?v[i]/v[i-1]:0));
+  let worst=-1,worstR=Infinity;
+  ST.forEach((s,i)=>{if(i===0)return;const ratio=rs[i]/s.min;if(v[i-1]>0&&ratio<1&&ratio<worstR){worstR=ratio;worst=i;}});
+
+  $('stages').innerHTML=ST.map((s,i)=>{
+    if(i===0)return `<div class="stage"><span>Leads</span><div class="bar"><i style="width:100%"></i></div><span style="text-align:right;font-weight:800">${fmt(L)}</span></div>`;
+    return `<div class="stage${i===worst?' btl':''}"><span>${s.n}</span><div class="bar"><i style="width:${Math.min(100,rs[i]*100)}%"></i><b style="left:calc(${s.min*100}% - 1px)"></b></div><span style="text-align:right;font-weight:800">${unk[i]?'No sé':pct(rs[i]*100,0)} <small style="color:var(--muted);font-weight:500">mín. ${pct(s.min*100,0)}</small></span></div>`;
+  }).join('');
+
+  if(worst<0){
+    $('btlName').textContent=L?'Ninguna etapa debajo de su mínimo':'—';
+    $('btlMsg').textContent=L?'Todas tus etapas llegan a su mínimo. Para crecer, sube el volumen de leads o mejora la etapa con menor porcentaje.':'';
+    $('btlPred').textContent='';
+    return;
+  }
+  const s=ST[worst];
+  const lost=Math.max(0,v[worst-1]*s.min-v[worst]);
+  let flow=v[worst-1]*s.min;
+  for(let j=worst+1;j<ST.length;j++){flow*=v[j-1]?v[j]/v[j-1]:0;}
+  const gain=Math.max(0,flow-v[4]);
+  $('btlName').textContent=s.n;
+  $('btlMsg').textContent=unk[worst]?'No tenemos el dato de esta etapa, así que la tomamos como déficit. Captúrala para medir qué tan lejos está de su mínimo.':`Avanza ${pct(rs[worst]*100,0)} y el mínimo es ${pct(s.min*100,0)}. Ahí se te fugan unos ${fmt(lost)} prospectos que deberías ${s.verb}.`;
+  $('btlPred').textContent=L?`Si esta etapa llega a su mínimo, ganarías unos ${fmt(gain)} inscritos más con los mismos leads (tasa de ${pct((v[4]+gain)/L*100)}).`:'';
+}
+
+/* ---------- arranque ---------- */
+function renderAll(){ metas(); personas(); embudo(); }
+buildCanales();
+renderAll();
+</script>
+</body>
+</html>
